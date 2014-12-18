@@ -10,9 +10,6 @@ global_option('--info', 'Set log level to INFO') { agent.log.level = Logger::INF
 global_option('--debug', 'Set log level to DEBUG') { agent.log.level = Logger::DEBUG }
 global_option('--format FORMAT', [:table, :csv], "Set output format (default: table)")
 
-require 'cupertino/provisioning_portal/commands/certificates'
-require 'cupertino/provisioning_portal/commands/devices'
 require 'cupertino/provisioning_portal/commands/profiles'
-require 'cupertino/provisioning_portal/commands/app_ids'
 require 'cupertino/provisioning_portal/commands/login'
 require 'cupertino/provisioning_portal/commands/logout'

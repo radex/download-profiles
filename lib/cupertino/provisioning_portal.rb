@@ -8,39 +8,9 @@ module Cupertino
     class UnsuccessfulAuthenticationError < RuntimeError; end
     class UnexpectedContentError < RuntimeError; end
 
-    class Device < Struct.new(:name, :udid, :enabled, :device_id)
-      def to_s
-        "#{self.name} #{self.udid} #{self.enabled}"
-      end
-    end
-
-    class Certificate < Struct.new(:name, :type, :expiration, :status, :download_url)
-      def to_s
-        "#{self.name}"
-      end
-    end
-
-    class AppID < Struct.new(:bundle_seed_id, :description, :development_properties, :distribution_properties, :identifier)
-      def to_s
-        "#{self.bundle_seed_id}"
-      end
-    end
-
     class ProvisioningProfile < Struct.new(:name, :type, :app_id, :status, :expiration, :download_url, :edit_url, :identifier)
       def to_s
         "#{self.name}"
-      end
-    end
-
-    class PassTypeID < Struct.new(:description, :id, :pass_certificates, :card_id)
-      def to_s
-        "#{self.id} #{self.description}"
-      end
-    end
-
-    class Team < Struct.new(:name, :programs, :identifier)
-      def to_s
-        "#{self.name} (#{self.identifier})" + (" [#{self.programs.join(', ')}]" unless self.programs.empty?).to_s
       end
     end
   end
