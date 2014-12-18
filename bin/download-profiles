@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'commander/import'
+require 'term/ansicolor'
+require 'csv'
+
+require 'download-profiles'
+
+HighLine.track_eof = false # Fix for built-in Ruby
+Signal.trap("INT") {} # Suppress backtrace when exiting command
+
+program :version, Cupertino::VERSION
+program :description, 'CLI tool for downloading iOS and Mac provisioning profiles'
+
+program :help, 'Author', 'Radek Pietruszewski <this.is@radex.io>'
+program :help, 'Website', 'https://github.com/radex'
+program :help_formatter, :compact
+
+default_command :download
+
+require 'download-profiles/provisioning_portal'
+require 'download-profiles/provisioning_portal/commands'

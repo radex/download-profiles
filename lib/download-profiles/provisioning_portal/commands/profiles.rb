@@ -1,5 +1,5 @@
-command :'profiles:download:all' do |c|
-  c.syntax = 'ios profiles:download:all'
+command :download do |c|
+  c.syntax = 'download-profiles'
   c.summary = 'Downloads all the active Provisioning Profiles'
 
   c.option '--type [TYPE]', [:development, :distribution], "Type of profile (development or distribution; defaults to development)"

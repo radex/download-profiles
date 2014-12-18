@@ -1,1 +1,0 @@
-require 'cupertino/version'

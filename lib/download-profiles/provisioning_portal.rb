@@ -16,4 +16,4 @@ module Cupertino
   end
 end
 
-require 'cupertino/provisioning_portal/agent'
+require 'download-profiles/provisioning_portal/agent'

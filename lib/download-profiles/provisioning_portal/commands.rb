@@ -1,6 +1,6 @@
 include Cupertino::ProvisioningPortal
 
-require 'cupertino/provisioning_portal/helpers'
+require 'download-profiles/provisioning_portal/helpers'
 include Cupertino::ProvisioningPortal::Helpers
 
 global_option('-u', '--username USER', 'Username') { |arg| agent.username = arg unless arg.nil? }
@@ -10,6 +10,6 @@ global_option('--info', 'Set log level to INFO') { agent.log.level = Logger::INF
 global_option('--debug', 'Set log level to DEBUG') { agent.log.level = Logger::DEBUG }
 global_option('--format FORMAT', [:table, :csv], "Set output format (default: table)")
 
-require 'cupertino/provisioning_portal/commands/profiles'
-require 'cupertino/provisioning_portal/commands/login'
-require 'cupertino/provisioning_portal/commands/logout'
+require 'download-profiles/provisioning_portal/commands/profiles'
+require 'download-profiles/provisioning_portal/commands/login'
+require 'download-profiles/provisioning_portal/commands/logout'

@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 
-require "cupertino/version"
+require "download-profiles/version"
 
 Gem::Specification.new do |s|
-  s.name        = "cupertino"
+  s.name        = "download-profiles"
   s.license     = "MIT"
-  s.authors     = ["Mattt Thompson"]
-  s.email       = "m@mattt.me"
-  s.homepage    = "http://nomad-cli.com"
+  s.authors     = ["Mattt Thompson", "Radek Pietruszewski"]
+  s.email       = "this.is@radex.io"
+  s.homepage    = 'https://github.com/radex'
   s.version     = Cupertino::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.summary     = "Cupertino"
-  s.description = "A command-line interface for the iOS Provisioning Portal"
+  s.summary     = "download-profiles"
+  s.description = "CLI tool for downloading iOS and Mac provisioning profiles"
 
   s.add_dependency "commander", "~> 4.2.0"
   s.add_dependency "term-ansicolor", "~> 1.0.7"
