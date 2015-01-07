@@ -9,10 +9,16 @@ A simple CLI tool for downloading iOS and Mac provisioning profiles and installi
 download-profiles requires the [Xcode Command Line Tools](https://developer.apple.com/xcode/), which can be installed with the following command:
 
 ```
-$ xcode-select --install
+xcode-select --install
 ```
 
 ## Setup
+
+To install:
+
+```
+gem install download-profiles
+```
 
 Before downloading profiles, you need to authenticate to Apple Developer Portal (you can also pass your login and password as parameters, but that's less convenient):
 
