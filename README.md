@@ -37,13 +37,13 @@ download-profiles
 Downloads and installs all valid provisioning profiles.
 
 ```
-download-profiles --platform=mac
+download-profiles --platform mac
 ```
 
 Installs all Mac profiles
 
 ```
-download-profiles --platform=ios --type=distribution
+download-profiles --platform ios --type distribution
 ```
 
 Installs all iOS distribution (AdHoc) profiles.
