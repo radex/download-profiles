@@ -7,11 +7,18 @@ command :download do |c|
   c.option '--type [TYPE]', [:development, :distribution, :all], "Type of profile (development, distribution or all)"
 
   c.action do |args, options|
-    type = (options.type.downcase.to_sym if options.type) || :all
-    platform = (options.platform.downcase.to_sym if options.platform) || :all
-    profiles = try{agent.list_profiles(type)}.select{|profile| profile.status == 'Active'}
-
+    platform = options.platform ? options.platform.downcase.to_sym : :all
+    type = options.type ? options.type.downcase.to_sym : :all
+    
+    platforms = (platform == :all) ? [:ios, :mac] : [platform]
+    types = (type == :all) ? [:development, :distribution] : [type]
+    
+    profiles = 
+      platforms.product(types).flat_map { |platform, type| try{agent.list_profiles(platform, type)} }
+      .select { |profile| profile.status == 'Active'}
+    
     say_warning "No active #{type} profiles found." and abort if profiles.empty?
+    
     profiles.each do |profile|
       if filename = agent.download_profile(profile)
         say_ok "Successfully downloaded: '#{filename}'"

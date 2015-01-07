@@ -59,12 +59,12 @@ module Cupertino
         raise UnsuccessfulAuthenticationError
       end
 
-      def list_profiles(type = :development)
+      def list_profiles(platform, type)
         url = case type
               when :development
-                'https://developer.apple.com/account/ios/profile/profileList.action?type=limited'
+                "https://developer.apple.com/account/#{platform}/profile/profileList.action?type=limited"
               when :distribution
-                'https://developer.apple.com/account/ios/profile/profileList.action?type=production'
+                "https://developer.apple.com/account/#{platform}/profile/profileList.action?type=production"
               else
                 raise ArgumentError, 'Provisioning profile type must be :development or :distribution'
               end
@@ -103,8 +103,8 @@ module Cupertino
           profile.type = type
           profile.status = row['status']
           profile.expiration = (Time.parse(row['dateExpire']) rescue nil)
-          profile.download_url = "https://developer.apple.com/account/ios/profile/profileContentDownload.action?displayId=#{row['provisioningProfileId']}"
-          profile.edit_url = "https://developer.apple.com/account/ios/profile/profileEdit.action?provisioningProfileId=#{row['provisioningProfileId']}"
+          profile.download_url = "https://developer.apple.com/account/#{platform}/profile/profileContentDownload.action?displayId=#{row['provisioningProfileId']}"
+          profile.edit_url = "https://developer.apple.com/account/#{platform}/profile/profileEdit.action?provisioningProfileId=#{row['provisioningProfileId']}"
           profile.identifier = row['UUID']
           profiles << profile
         end
