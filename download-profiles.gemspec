@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "commander", "~> 4.2.0"
   s.add_dependency "term-ansicolor", "~> 1.0.7"
-  s.add_dependency "mechanize", "~> 2.5.1"
+  s.add_dependency "mechanize", "~> 2.7.3"
   s.add_dependency "nokogiri", "~> 1.6.3"
   s.add_dependency "security", "~> 0.1.2"
   s.add_dependency "certified", ">= 0.1.0"

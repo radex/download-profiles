@@ -8,7 +8,7 @@ module Cupertino
     class UnsuccessfulAuthenticationError < RuntimeError; end
     class UnexpectedContentError < RuntimeError; end
 
-    class ProvisioningProfile < Struct.new(:name, :type, :app_id, :status, :expiration, :download_url, :edit_url, :identifier)
+    class ProvisioningProfile < Struct.new(:name, :type, :platform, :app_id, :status, :expiration, :download_url, :edit_url, :identifier)
       def to_s
         "#{self.name}"
       end

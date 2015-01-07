@@ -101,6 +101,7 @@ module Cupertino
           profile = ProvisioningProfile.new
           profile.name = row['name']
           profile.type = type
+          profile.platform = platform
           profile.status = row['status']
           profile.expiration = (Time.parse(row['dateExpire']) rescue nil)
           profile.download_url = "https://developer.apple.com/account/#{platform}/profile/profileContentDownload.action?displayId=#{row['provisioningProfileId']}"
@@ -113,9 +114,10 @@ module Cupertino
       end
 
       def download_profile(profile)
+        ext = (profile.platform == :ios) ? 'mobileprovision' : 'provisionprofile'
         self.pluggable_parser.default = Mechanize::Download
         download = get(profile.download_url)
-        download.save
+        download.save!(::File.expand_path("~/Library/MobileDevice/Provisioning Profiles/#{profile.identifier}.#{ext}"))
         download.filename
       end
 
