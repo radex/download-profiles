@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.authors     = ["Mattt Thompson", "Radek Pietruszewski"]
   s.email       = "this.is@radex.io"
-  s.homepage    = 'https://github.com/radex'
+  s.homepage    = 'https://github.com/radex/download-profiles'
   s.version     = Cupertino::VERSION
   s.platform    = Gem::Platform::RUBY
   s.summary     = "download-profiles"
