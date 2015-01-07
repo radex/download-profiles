@@ -1,182 +1,59 @@
-![Cupertino](https://raw.github.com/nomad/nomad.github.io/assets/cupertino-banner.png)
+# download-profiles
 
-Automate administrative tasks that you would normally have to do through the Apple Dev Center websites. Life's too short to manage device identifiers by hand!
+A simple CLI tool for downloading iOS and Mac provisioning profiles and installing them in the system.
 
-> Cupertino is named after [Cupertino, CA](http://en.wikipedia.org/wiki/Cupertino,_California): home to Apple, Inc.'s world headquarters.
-> It's part of a series of world-class command-line utilities for iOS development, which includes [Shenzhen](https://github.com/mattt/shenzhen) (Building & Distribution), [Houston](https://github.com/mattt/houston) (Push Notifications), [Venice](https://github.com/mattt/venice) (In-App Purchase Receipt Verification), [Dubai](https://github.com/mattt/dubai) (Passbook pass generation), and [Nashville](https://github.com/nomad/nashville) (iTunes Store API).
+(Based on [Cupertino](https://github.com/nomad/cupertino))
 
 ## Requirements
 
-Cupertino requires the [Xcode Command Line Tools](https://developer.apple.com/xcode/), which can be installed with the following command:
+download-profiles requires the [Xcode Command Line Tools](https://developer.apple.com/xcode/), which can be installed with the following command:
 
 ```
 $ xcode-select --install
 ```
 
-## Installation
+## Setup
+
+Before downloading profiles, you need to authenticate to Apple Developer Portal (you can also pass your login and password as parameters, but that's less convenient):
 
 ```
-$ gem install cupertino
-```
-
-## Usage
-
-### Authentication
-
-```
-$ ios login
+download-profiles login
 ```
 
 _Credentials are saved in the Keychain. You will not be prompted for your username or password by commands while you are logged in. (Mac only)_
 
-### Devices
+## Usage
 
 ```
-$ ios devices:list
-
-+------------------------------+---------------------------------------+
-|       Listing 2 devices. You can register 98 additional devices.     |
-+---------------------------+------------------------------------------+
-| Device Name               | Device Identifier                        |
-+---------------------------+------------------------------------------+
-| Johnny Appleseed iPad     | 0123456789012345678901234567890123abcdef |
-| Johnny Appleseed iPhone   | abcdef0123456789012345678901234567890123 |
-+---------------------------+------------------------------------------+
-
-$ ios devices:add "iPad 1"=abc123
-$ ios devices:add "iPad 2"=def456 "iPad 3"=ghi789 ...
+download-profiles
 ```
 
-### Provisioning Profiles
+Downloads and installs all valid provisioning profiles.
 
 ```
-$ ios profiles:list
-
-+----------------------------------+--------------+---------+
-| Profile                          | App ID       | Status  |
-+----------------------------------+--------------+---------+
-| iOS Team Provisioning Profile: * | ABCDEFG123.* | Valid   |
-+----------------------------------+--------------+---------+
+download-profiles --platform=mac
 ```
 
----
+Installs all Mac profiles
 
 ```
-$ ios profiles:manage:devices
+download-profiles --platform=ios --type=distribution
 ```
 
-_Opens an editor with a list of devices, each of which can be commented / uncommented to turn them off / on for that provisioning profile._
+Installs all iOS distribution (AdHoc) profiles.
 
-```
-# Comment / Uncomment Devices to Turn Off / On for Provisioning Profile
-Johnny Appleseed iPad 0123456789012345678901234567890123abcdef
-# Johnny Appleseed iPhone abcdef0123456789012345678901234567890123
-```
-
-```
-$ ios profiles:devices:add MyApp_Development_Profile "Johnny Appleseed iPad"=0123456789012345678901234567890123abcdef "Johnny Appleseed iPhone"=abcdef0123456789012345678901234567890123
-```
-
-_Adds (without an editor) a list of devices to a provisioning profile_
-
-```
-$ ios profiles:devices:remove MyApp_Development_Profile "Johnny Old iPad"=0123456789012345678901234567890123abcdef "Johnny Old iPhone"=abcdef0123456789012345678901234567890123
-```
-
-_Removes (without an editor) a list of devices from a provisioning profile_
-
----
-
-```
-$ ios profiles:devices:list MyApp_Development_Profile
-
-+--------------------------+------------------------------------------+--------+
-|         Listing devices for provisioning profile MyApp_Development_Profile   |
-+--------------------------+------------------------------------------+--------+
-| Device Name              | Device Identifier                        | Active |
-+--------------------------+------------------------------------------+--------+
-| Person's iPhone 5        | 888888883e48a3e0458aab2691d565a8a63f7888 |   Y    |
-+--------------------------+------------------------------------------+--------+
-
-```
-
-### App IDs
-
-```
-$ ios app_ids:list
-
-+-----------------------------+------------------------+-------------------+-------------------+
-| Bundle Seed ID              | Description            | Development       | Distribution      |
-+-----------------------------+------------------------+-------------------+-------------------+
-| 123ABCDEFG.com.mattt.bundle | App Bundle Description | Passes            | Passes            |
-|                             |                        | Data Protection   | Data Protection   |
-|                             |                        | iCloud            | iCloud            |
-|                             |                        | In-App Purchase   | In-App Purchase   |
-|                             |                        | Game Center       | Game Center       |
-|                             |                        | Push Notification | Push Notification |
-+-----------------------------+------------------------+-------------------+-------------------+
-```
-
-```
-$ ios app_ids:add "App Bundle Description"=123ABCDEFG.com.mattt.bundle
-```
-
-### Certificates
-
-```
-$ ios certificates:list
-
-+------------------+----------------------------------+-----------------+--------+
-| Name             | Provisioning Profiles            | Expiration Date | Status |
-+------------------+----------------------------------+-----------------+--------+
-| Johnny Appleseed | iOS Team Provisioning Profile: * | Dec 23, 2012    | Issued |
-+------------------+----------------------------------+-----------------+--------+
-```
-
-```
-$ ios certificates:download
-$ ios certificates:download --type distribution
-$ ios certificates:download NAME
-```
-
-## CSV Output
-
-The following commands will format their output as [comma-separated values](http://en.wikipedia.org/wiki/Comma-separated_values) when the `--format csv` argument is passed:
-
-- `app_ids:list`
-- `devices:list`
-- `profiles:list`
-- `profiles:manage:devices:list`
-
-## Commands
-
-- `login`
-- `logout`
-- `devices:add`
-- `devices:list`
-- `profiles:list`
-- `profiles:manage:devices`
-- `profiles:manage:devices:add`
-- `profiles:manage:devices:remove`
-- `profiles:download`
-- `profiles:download:all`
-- `profiles:devices:list`
-- `certificates:list`
-- `certificates:download`
-- `app_ids:list`
-
-## Proxies
-
-Cupertino will access the provisioning portal through a proxy if the `HTTP_PROXY` environment variable is set, with optional credentials `HTTP_PROXY_USER` and `HTTP_PROXY_PASSWORD`.
+For more info, check out `download-profiles --help`
 
 ## Contact
 
-Mattt Thompson
+Radek Pietruszewski
 
-- http://github.com/mattt
-- http://twitter.com/mattt
-- m@mattt.me
+- http://github.com/radex
+- http://twitter.com/radexp
+- this.is@radex.io
 
-## License
+## License and credits
 
-Cupertino is available under the MIT license. See the LICENSE file for more info.
+download-profiles is based on [Cupertino](https://github.com/nomad/cupertino) by [Mattt Thompson](https://github.com/mattt). I merely removed everything from the code that wasn't related to provisioning profiles, added support for Mac profiles and changed the behavior so that profiles are installed (copied into user's ~/Library) instead of downloaded into the working directory.
+
+download-profiles is available under the MIT license. See the LICENSE file for more info.
