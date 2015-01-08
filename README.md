@@ -1,4 +1,4 @@
-# download-profiles
+# download-profiles [![Gem Version](https://badge.fury.io/rb/download-profiles.svg)](http://badge.fury.io/rb/download-profiles)
 
 A simple CLI tool for downloading iOS and Mac provisioning profiles and installing them in the system.
 
