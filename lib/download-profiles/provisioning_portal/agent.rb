@@ -81,7 +81,9 @@ module Cupertino
                             when :distribution
                               '&type=production'
                             end
-
+        
+        profile_data_url += "&pageSize=50&pageNumber=1&sort=name=asc"
+        
         post(profile_data_url)
         @profile_csrf_headers = {
           'csrf' => page.response['csrf'],
